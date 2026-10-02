@@ -21,6 +21,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::614247923247:role/git-connect-role
           aws-region: ap-south-1
+          role-session-name: github-actions-session
 
       - name: Terraform Init and Apply
         run: |
