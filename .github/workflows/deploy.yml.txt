@@ -1,0 +1,28 @@
+name: AWS Terraform Deployment
+on:
+  push:
+    branches:
+      - main
+
+# Explicitly grant OIDC permissions
+permissions:
+  id-token: write   
+  contents: read    
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::614247923247:role/git-connect-role
+          aws-region: ap-south-1
+
+      - name: Terraform Init and Apply
+        run: |
+          terraform init
+          terraform apply -auto-approve
