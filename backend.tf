@@ -1,9 +1,14 @@
 terraform {
   backend "s3" {
-    bucket         = "aws-application-987"
-    key            = "github-actions/terraform.tfstate"
-    region         = "ap-south-1"
-    dynamodb_table = "my-tf-lock-table"
-    encrypt        = true
+    bucket       = "aws-application-987"
+    key          = "practice/terraform.tfstate"
+    region       = "ap-south-1"
+    use_lockfile = true
+  }
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
   }
 }
